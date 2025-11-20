@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Brand>
+
+<h2 style="font-family:verdana">Brand List</h2>
+<a asp-action="Create" class="btn btn-sm btn-primary">Add Brand</a>
+
+<table class="table table-bordered table-hover mt-3 text-center">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var brand in Model)
+        {
+            <tr>
+                <td>@brand.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@brand.Id" class="btn btn-sm btn-warning">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

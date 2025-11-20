@@ -1,0 +1,80 @@
+﻿@model Vehicle
+
+<h2 class="mb-3 text-center" style="font-family:verdana">Add New Vehicle</h2>
+
+<form asp-action="Create" enctype="multipart/form-data" method="post" class="card p-4 shadow-sm" asp-antiforgery="true">
+    <div class="mb-3">
+        <label asp-for="Model" class="form-label"></label>
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BrandId" class="form-label">Brand</label>
+        <select asp-for="BrandId" class="form-select" asp-items="@(new SelectList(ViewBag.Brands, "Id", "Name"))"> @* Here Id is the value field and Name is the text field *@
+            <option value="">-- Select Brand --</option>
+        </select>
+        <span asp-validation-for="BrandId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="VehicleType.TypeName" class="form-label">Body Type</label>
+        <input asp-for="VehicleType.TypeName" class="form-control" placeholder="e.g. Sedan, SUV" />
+        <span asp-validation-for="VehicleType.TypeName" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="BaseModelPrice" class="form-label"></label>
+            <input asp-for="BaseModelPrice" class="form-control" />
+            <span asp-validation-for="BaseModelPrice" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="TopModelPrice" class="form-label"></label>
+            <input asp-for="TopModelPrice" class="form-control" />
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Engine" class="form-label"></label>
+            <input asp-for="Engine" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="FuelType" class="form-label"></label>
+            <input asp-for="FuelType" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Transmission" class="form-label"></label>
+            <input asp-for="Transmission" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Mileage" class="form-label"></label>
+            <input asp-for="Mileage" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="TopSpeed" class="form-label"></label>
+            <input asp-for="TopSpeed" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="SeatingCapacity" class="form-label"></label>
+            <input asp-for="SeatingCapacity" class="form-control" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Upload Image</label>
+        <input type="file" name="imageFile" class="form-control" accept="image/*" />
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">Save Vehicle</button>
+</form>
+
+

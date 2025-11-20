@@ -1,0 +1,6 @@
+@AutoVerse.API_HostAddress = http://localhost:5294
+
+GET {{AutoVerse.API_HostAddress}}/VehicleApi/
+Accept: application/json
+
+###

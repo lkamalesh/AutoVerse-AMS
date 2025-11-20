@@ -1,0 +1,12 @@
+﻿@model Brand
+
+<h2 style="font-family:verdana">Edit Brand</h2>
+<form asp-action="Edit" method="post" asp-antiforgery="true">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

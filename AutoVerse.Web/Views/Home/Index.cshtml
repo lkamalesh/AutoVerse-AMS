@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Vehicle>
+<form method="get" asp-controller="Home" asp-action="Index" class="d-flex justify-content-center" role="search">
+    <div class="col-md-2 me-2">
+        <input type="text" name="searchBrand" value="@Context.Request.Query["searchBrand"]"
+               class="form-control" placeholder="Brand" />
+    </div>
+    <div class="col-md-2 me-2">
+        <input type="text" name="searchModel" value="@Context.Request.Query["searchModel"]"
+               class="form-control" placeholder="Model" />
+    </div>
+    <div class="col-md-2">
+        <input type="number" name="minPrice" value="@Context.Request.Query["minPrice"]"
+               class="form-control" placeholder="Min Price" />
+    </div>
+    <div class="col-md-2 me-3">
+        <input type="number" name="maxPrice" value="@Context.Request.Query["maxPrice"]"
+               class="form-control" placeholder="Max Price" />
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-success w-100" type="submit">Search</button>
+    </div>
+</form>
+
+<div class="container mt-4">
+    <p class="text-center text-muted">Browse our latest vehicles and discover your dream ride.</p>
+
+    <div class="row">
+        @foreach (var v in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <img src="@v.Imageurl" class="card-img-top" alt="@v.Model" style="height:200px;object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@v.Model</h5>
+                        <p class="card-text">
+                            <strong>Brand:</strong> @v.Brand?.Name <br />
+                            <strong>Price starts from:</strong> $@v.BaseModelPrice <br />
+                            <strong>Rating:</strong> @v.Rating ⭐
+                        </p>
+                        <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@v.Id" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
