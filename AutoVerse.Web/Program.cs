@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.Console()
-    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File("/home/LogFiles/Serilog/log-.txt", rollingInterval: RollingInterval.Day, shared: true)
     .CreateLogger();
 
 builder.Host.UseSerilog();

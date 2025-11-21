@@ -16,9 +16,9 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Information()
+    .MinimumLevel.Debug()
     .WriteTo.Console()
-    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File("/home/LogFiles/Serilog/log-.txt", rollingInterval: RollingInterval.Day, shared: true)
     .CreateLogger();
 
 builder.Host.UseSerilog();
@@ -73,7 +73,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
