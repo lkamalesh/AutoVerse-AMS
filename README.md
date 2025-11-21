@@ -24,7 +24,7 @@ It’s designed to showcase a structured professional project with:
 - Repository Pattern
 - Serilog (File + Console Logging)
 - Bootstrap 5
-- 
+  
 ### User & Role Management
 - User registration & login using **ASP.NET Identity**
 - Role-based access: **Admin** and **Customer**
