@@ -161,13 +161,12 @@ POST /api/Auth/login
 }
 
 Returns:
-
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI..."
 }
-
-
 Use this as Bearer Token in Postman.
+
+---------
 
 **Admin Test Account (For API & MVC)**
 
