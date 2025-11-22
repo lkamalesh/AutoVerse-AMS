@@ -122,7 +122,7 @@ It’s designed to showcase a structured professional project with:
 
 **Customer sample Test Account (browse and rate)**
 
-Register ->
+`Register`
 
 POST /api/Auth/register
 {
@@ -132,7 +132,7 @@ POST /api/Auth/register
   "confirmpassword": "Password123!"
 }
 
-Login ->
+`Login`
 
 POST /api/Auth/login
 
@@ -149,7 +149,7 @@ Use this as Bearer Token in Postman.
 
 ---------
 
-** sample inputs to rate vehciles:**
+**sample inputs to rate vehciles**
 
 POST /api/RatingApi/AddRating
 
