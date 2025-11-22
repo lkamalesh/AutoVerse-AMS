@@ -117,7 +117,9 @@ It’s designed to showcase a structured professional project with:
 **| PUT    | `/api/VehicleApi/Edit                    |** (Admin only)
 
 **| DELETE | `/api/VehicleApi/Delete/{id}             |** (Admin only)
-----------------------------------------------------
+
+
+-------------
 
 **Customer sample Test Account (browse and rate)**
 
