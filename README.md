@@ -125,6 +125,7 @@ It’s designed to showcase a structured professional project with:
 `Register`
 
 POST /api/Auth/register
+
 {
   "fullName": "John victor",
   "email": "john@gmail.com",
@@ -142,18 +143,12 @@ POST /api/Auth/login
 }
 
 Returns:
+
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI..."
 }
+
 Use this as Bearer Token in Postman.
 
 ---------
 
-**sample inputs to rate vehciles**
-
-POST /api/RatingApi/AddRating
-
-{
-  "vehicleId": {vehicle id},
-  "value": {1 - 5}
-}
