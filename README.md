@@ -98,25 +98,24 @@ It’s designed to showcase a structured professional project with:
 **Postman Testing Section:**
 ----------------------------------------------------
 **| Method | Endpoint                                 |**
-**| ------ | ---------------------------------------  |**
 
 **| POST   | `/api/Auth/register`                     |**
 
 **| POST   | `/api/Auth/login`                        |**
 
-**| GET    | `/api/VehicleApi/GetAll                  |**
+**| GET    | `/api/VehicleApi/GetAll`                 |**
 
-**| GET    | `/api/VehicleApi/GetById/{id}            |**
+**| GET    | `/api/VehicleApi/GetById/{id}`           |**
 
-**| GET    | `/api/VehicleApi/GetByBrand/{brandName}  |**
+**| GET    | `/api/VehicleApi/GetByBrand/{brandName}` |**
 
-**| POST   | `/api/RatingApi/AddRating                |**
+**| POST   | `/api/RatingApi/AddRating`               |**
 
-**| POST   | `/api/VehicleApi/Create                  |** (Admin only)
+**| POST   | `/api/VehicleApi/Create`                 |** (Admin only)
 
-**| PUT    | `/api/VehicleApi/Edit                    |** (Admin only)
+**| PUT    | `/api/VehicleApi/Edit`                   |** (Admin only)
 
-**| DELETE | `/api/VehicleApi/Delete/{id}             |** (Admin only)
+**| DELETE | `/api/VehicleApi/Delete/{id}`            |** (Admin only)
 
 
 -------------
