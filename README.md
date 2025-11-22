@@ -20,7 +20,7 @@ It’s designed to showcase a structured professional project with:
 - Entity Framework Core
 - SQL Server
 - ASP.NET Identity
-- JWT Authentication
+- JWT & cookie Authentication
 - Repository Pattern
 - Serilog (File + Console Logging)
 - Bootstrap 5
