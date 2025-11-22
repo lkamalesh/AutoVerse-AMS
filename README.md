@@ -1,5 +1,19 @@
 # AutoVerse – Powered by TopSpeed Motors 
 
+**Live Demo (Azure)**
+
+ `MVC Customer Website:`
+
+https://autoverse-web-dmdzhxcbgaf4b8f7.southeastasia-01.azurewebsites.net
+
+ `Web API (Swagger):`
+
+https://autoverse-api-arfxgvdkhcc5a7e2.southeastasia-01.azurewebsites.net/swagger
+
+Deployed using Azure Database and Azure App Service.
+
+**Overview**
+
 AutoVerse is a full-stack **Automobile Management System** built as a portfolio-grade project to demonstrate clean architecture,
 real-world features, and enterprise-style patterns** using ASP.NET Core.
 
@@ -10,6 +24,7 @@ It’s designed to showcase a structured professional project with:
 - MVC front-end + REST API for integrations
 - Rating system for vehicles
 - Centralized exception handling and logging
+- Hosted on Microsoft Azure
 ---
 
 ## Features - 
@@ -23,6 +38,8 @@ It’s designed to showcase a structured professional project with:
 - JWT & Cookie Authentication
 - Repository Pattern
 - Serilog (File + Console Logging)
+- Azure App Service (Web + API)
+- Azure SQL Database
 - Bootstrap 5
   
 ### User & Role Management
