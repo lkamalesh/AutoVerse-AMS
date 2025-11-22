@@ -1,4 +1,4 @@
-# AutoVerse – Automobile Management System 
+# AutoVerse – Powered by TopSpeed Motors 
 
 AutoVerse is a full-stack **Automobile Management System** built as a portfolio-grade project to demonstrate clean architecture,
 real-world features, and enterprise-style patterns** using ASP.NET Core.
@@ -91,29 +91,7 @@ It’s designed to showcase a structured professional project with:
 
 ------
 
-## Quick Start for Local Setup
-
-**1. Clone**
-```bash
-git clone https://github.com/lkamalesh/AutoVerse-AMS.git
-cd AutoVerse-AMS
-
-**2. Configure Database**
-
-Update connection string in:
-
-/AutoVerse.Web/appsettings.json
-/AutoVerse.API/appsettings.json
-
-Then apply migrations: Update-Database
-
-**3. Run MVC**
-
-Set AutoVerse.Web as startup → Run
-
-**4. Run API**
-
-Set AutoVerse.API as startup → Run.
+##  API – Quick Usage Guide
 
 **API Documentation (with Working JSON Examples)**
 
@@ -132,14 +110,16 @@ Set AutoVerse.API as startup → Run.
 
 **| GET    | `/api/VehicleApi/GetByBrand/{brandName}  |**
 
-**| POST   | `/api/VehicleApi/Create                  |**
+**| POST   | `/api/RatingApi/AddRating                |**
 
-**| PUT    | `/api/VehicleApi/Edit                    |**
+**| POST   | `/api/VehicleApi/Create                  |** (Admin only)
 
-**| DELETE | `/api/VehicleApi/Delete/{id}             |**
+**| PUT    | `/api/VehicleApi/Edit                    |** (Admin only)
+
+**| DELETE | `/api/VehicleApi/Delete/{id}             |** (Admin only)
 ----------------------------------------------------
 
-**Customer Test Account (browse vehicles)**
+**Customer sample Test Account (browse and rate)**
 
 Register ->
 
@@ -168,41 +148,11 @@ Use this as Bearer Token in Postman.
 
 ---------
 
-**Admin Test Account (For API & MVC)**
+** sample inputs to rate vehciles:**
 
-Use this test admin account to try Vehicle CRUD:
-{
-  Email: "administrator@autoverse.com"  
-  Password: "iamAdmin@123"
-}
-
-**Vehicle API - sample inputs to test:**
-
-Create Vehicle ->
+POST /api/RatingApi/AddRating
 
 {
-  "model": "Tata Nexon EV",
-  "brandId": 1,
-  "vehicleTypeId": 2,
-  "price": 1400000,
-  "fuelType": "Electric",
-  "transmission": "Automatic",
-  "mileage": 312,
-  "topSpeed": 120,
-  "seatingCapacity": 5
-}
-
-Update Vehicle ->
-
-{
-  "id": 6,
-  "model": "Tata Nexon EV - Long Range",
-  "brandId": 1,
-  "vehicleTypeId": 2,
-  "price": 1550000,
-  "fuelType": "Electric",
-  "transmission": "Automatic",
-  "mileage": 390,
-  "topSpeed": 130,
-  "seatingCapacity": 5,
+  "vehicleId": {vehicle id},
+  "value": {1 - 5}
 }
