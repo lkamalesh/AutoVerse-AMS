@@ -28,6 +28,7 @@ It’s designed to showcase a structured professional project with:
 ### User & Role Management
 - User registration & login using **ASP.NET Identity**
 - Role-based access: **Admin** and **Customer**
+- Admin can create/assign new roles
 - Admin-only pages for managing vehicles and brands
 - Customers can browse, view details, and rate vehicles
 
