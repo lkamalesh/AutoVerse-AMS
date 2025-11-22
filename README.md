@@ -127,10 +127,12 @@ It’s designed to showcase a structured professional project with:
 POST /api/Auth/register
 
 {
+
   "fullName": "John victor",
   "email": "john@gmail.com",
-  "password": "Password123!"
+  "password": "Password123!",
   "confirmpassword": "Password123!"
+  
 }
 
 `Login`
@@ -138,17 +140,21 @@ POST /api/Auth/register
 POST /api/Auth/login
 
 {
+
   "email": "john@gmail.com",
   "password": "Password123!"
+  
 }
 
 Returns:
 
 {
+
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI..."
+  
 }
 
-Use this as Bearer Token in Postman.
+Use the Bearer Token in Postman.
 
 ---------
 
