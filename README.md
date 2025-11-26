@@ -18,7 +18,7 @@ AutoVerse is a full-stack **Automobile Management System** built as a portfolio-
 real-world features, and enterprise-style patterns** using ASP.NET Core.
 
 It’s designed to showcase a structured professional project with:
-- Layered architecture (Core, Infrastructure, Web, API)
+- N-tier architecture (Core, Infrastructure, Web, API)
 - Repository pattern for data access
 - ASP.NET Identity for authentication & roles (Admin, Customer)
 - MVC front-end + REST API for integrations
