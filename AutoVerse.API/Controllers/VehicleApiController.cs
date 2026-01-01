@@ -1,9 +1,12 @@
-﻿using AutoVerse.Core.Entities;
+﻿using AutoVerse.API.Mappings;
+using AutoVerse.Core.DTOs;
+using AutoVerse.Core.Entities;
 using AutoVerse.Core.Interfaces.Services;
 using AutoVerse.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace AutoVerse.API.Controllers
 {
@@ -22,60 +25,57 @@ namespace AutoVerse.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var vehicles = await _vehicleService.GetAllVehiclesAsync();
-            return Ok(vehicles);
+            return Ok(VehicleMappings.ToDtos(vehicles));
         }
 
         [Authorize]
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var vehicle = await _vehicleService.SearchByIdAsync(id);
+            var vehicle = await _vehicleService.GetByIdAsync(id);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            return Ok(vehicle);
+            return Ok(VehicleMappings.ToDto(vehicle));
         }
         [Authorize]
         [HttpGet("GetByBrand/{brandName}")]
         public async Task<IActionResult> GetByBrand(string brandName)
         {
-            var vehicles = await _vehicleService.SearchByBrandAsync(brandName);
+            var vehicles = await _vehicleService.SearchVehiclesAsync(brandName, null, null, null);
 
             if (vehicles == null)
             {
                 return NotFound();
             }
 
-            return Ok(vehicles);
+            return Ok(VehicleMappings.ToDtos(vehicles));
         }
 
         [Authorize(Roles ="Admin")]
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody]Vehicle vehicle)
+        public async Task<IActionResult> Create([FromBody]VehicleDto vehicleDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            var vehicle = VehicleMappings.ToEntity(vehicleDto);
             await _vehicleService.AddVehicleAsync(vehicle, null);
-            return Ok(new {Message = "Vehicle added successfully" });
+            Log.Information($"New vehicle created. Id={vehicleDto.Id}");
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = vehicle.Id },
+                new { Message = "Vehicle added successfully" }
+            );
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Edit")]
-        public async Task<IActionResult> Update([FromBody] Vehicle vehicle)
+        public async Task<IActionResult> Update([FromBody] VehicleDto vehicleDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            var vehicle = VehicleMappings.ToEntity(vehicleDto);
             await _vehicleService.UpdateVehicleAsync(vehicle, null);
-            return Ok(new { Message = "Vehicle updated successfully" });
+            return NoContent();
         }
 
         [Authorize(Roles = "Admin")]
@@ -83,7 +83,8 @@ namespace AutoVerse.API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _vehicleService.DeleteVehicleAsync(id);
-            return Ok(new { Message = "Vehicle deleted successfully" });
+            Log.Information($"Vehicle deleted. Id={id}");
+            return NoContent();
         }
     }
 }

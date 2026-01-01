@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Vehicle>
+﻿@model IEnumerable<VehicleViewModel>
 
 <h2 class="mb-3 text-center" style="font-family:verdana">Vehicles</h2>
 <div class="mb-2">
-    <a asp-controller="Vehicle" asp-action="Create" class="btn btn-sm btn-secondary">Add Vehicle</a>
+    <a asp-controller="Vehicle" asp-action="Create" class="btn btn-sm btn-primary">Add Vehicle</a>
 </div>
 <table class="table table-bordered table-striped text-center">
     <thead>
@@ -19,8 +19,8 @@
         {
             <tr>
                 <td>@v.Model</td>
-                <td>@v.Brand?.Name</td>
-                <td>@v.VehicleType?.TypeName</td>
+                <td>@v.BrandName</td>
+                <td>@v.BodyType</td>
                 <td>@v.Rating ⭐</td>
                 <td>
                     <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@v.Id" class="btn btn-sm btn-warning">Update</a>

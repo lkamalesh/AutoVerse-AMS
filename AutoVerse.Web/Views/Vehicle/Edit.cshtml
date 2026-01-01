@@ -1,8 +1,9 @@
-﻿@model AutoVerse.Core.Entities.Vehicle
+﻿@model VehicleViewModel
 
 <h2 class="mb-3 text-center" style="font-family:verdana">Edit Vehicle</h2>
 
 <form asp-action="Edit" enctype="multipart/form-data" method="post" class="card p-4 shadow-sm" asp-antiforgery="true">
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
     <input type="hidden" asp-for="Id" />
 
     <div class="mb-3">
@@ -16,11 +17,24 @@
         <select asp-for="BrandId" class="form-select" asp-items="@(new SelectList(ViewBag.Brands, "Id", "Name"))">
             <option value="">-- Select Brand --</option>
         </select>
+        <span asp-validation-for="BrandId" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="VehicleType.TypeName" class="form-label">Body Type</label>
-        <input asp-for="VehicleType.TypeName" class="form-control" />
+        <label asp-for="BodyType" class="form-label">Body Type</label>
+        <select asp-for="BodyType"
+                class="form-select">
+            <option value="">-- Select Body Type --</option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Truck">Truck</option>
+            <option value="Luxury Sedan">Luxury Sedan</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Luxury SUV">Luxury SUV</option>
+            <option value="Sports Car">Sports Car</option>
+            <option value="Coupe">Coupe</option>
+        </select>
+        <span asp-validation-for="BodyType" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -61,8 +75,8 @@
         <input asp-for="SeatingCapacity" class="form-control" />
     </div>
     <div class="mb-3">
-        <label asp-for="Imageurl" class="form-label"></label>
-        <input asp-for="Imageurl" class="form-control" readonly />
+        <label asp-for="ImageUrl" class="form-label"></label>
+        <input asp-for="ImageUrl" class="form-control" readonly />
     </div>
 
     <div class="mb-3">

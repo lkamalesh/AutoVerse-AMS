@@ -1,8 +1,10 @@
-﻿@model Vehicle
+﻿@model VehicleViewModel
 
 <h2 class="mb-3 text-center" style="font-family:verdana">Add New Vehicle</h2>
 
 <form asp-action="Create" enctype="multipart/form-data" method="post" class="card p-4 shadow-sm" asp-antiforgery="true">
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
     <div class="mb-3">
         <label asp-for="Model" class="form-label"></label>
         <input asp-for="Model" class="form-control" />
@@ -18,9 +20,19 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="VehicleType.TypeName" class="form-label">Body Type</label>
-        <input asp-for="VehicleType.TypeName" class="form-control" placeholder="e.g. Sedan, SUV" />
-        <span asp-validation-for="VehicleType.TypeName" class="text-danger"></span>
+        <label asp-for="BodyType" class="form-label">Body Type</label>
+        <select asp-for="BodyType"class="form-select">
+            <option>-- Select Body Type --</option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Truck">Truck</option>
+            <option value="Luxury Sedan">Luxury Sedan</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Luxury SUV">Luxury SUV</option>
+            <option value="Sports Car">Sports Car</option>
+            <option value="Coupe">Coupe</option>
+        </select>
+        <span asp-validation-for="BodyType" class="text-danger"></span>
     </div>
 
     <div class="row">

@@ -19,7 +19,7 @@ namespace AutoVerse.Core.Entities
         public double Value { get; set; }
 
         [Required]
-        public string UserId { get; set; } = string.Empty; // Foreign key to User
+        public string UserId { get; set; } = null!; // Foreign key to User
 
         // Navigation
         public Vehicle? Vehicle { get; set; }

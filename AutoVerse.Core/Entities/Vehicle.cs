@@ -14,7 +14,11 @@ namespace AutoVerse.Core.Entities
 
         [Required]
         [MaxLength(100)]
-        public string Model { get; set; } = string.Empty;// -> Non-Nullable.
+        public string Model { get; set; } = null!;// -> Non-Nullable.
+
+        [Required]
+        [MaxLength(50)]
+        public string BodyType { get; set; } = null!;
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
@@ -48,11 +52,7 @@ namespace AutoVerse.Core.Entities
         [Required]
         public int BrandId { get; set; }
 
-        [Required]
-        public int VehicleTypeId { get; set; }
-
         public Brand? Brand { get; set; }// Navigation property to the Brand entity.
-        public VehicleType? VehicleType { get; set; }// Navigation property to the Category entity.
 
     }
 }

@@ -18,7 +18,7 @@ namespace AutoVerse.Infrastructure.Repositories
 
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbset.ToListAsync();
+            return await _dbset.AsNoTracking().ToListAsync();// AsNoTracking improves performance for read-only operations.
         }
 
         public virtual async Task<T?> GetByIdAsync(int id)
@@ -49,5 +49,11 @@ namespace AutoVerse.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

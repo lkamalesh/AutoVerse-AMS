@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoVerse.Infrastructure.Data;
 using AutoVerse.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using AutoVerse.Core.ViewModels;
 
 namespace AutoVerse.Infrastructure.Repositories
 {
@@ -23,5 +24,6 @@ namespace AutoVerse.Infrastructure.Repositories
             return await _context.Brands.AnyAsync(b => b.Name.ToLower() == name.ToLower());
             //Use AnyAsync if you just want to check for existence  
         }
+        
     }
 }

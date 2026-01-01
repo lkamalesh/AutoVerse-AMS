@@ -56,6 +56,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 
@@ -63,9 +65,6 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<CustomExceptionFilter>();
 
-}).AddJsonOptions(options =>
-{//Used to ignore the navigation property references.
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
 builder.Services.AddEndpointsApiExplorer();

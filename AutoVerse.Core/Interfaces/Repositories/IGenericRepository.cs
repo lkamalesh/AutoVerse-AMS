@@ -14,5 +14,6 @@ namespace AutoVerse.Core.Interfaces.Repositories
         Task AddAsync(T Entity);
         Task UpdateAsync(T Entity);
         Task DeleteAsync(int id);
+        Task SaveChangesAsync();
     }
 }

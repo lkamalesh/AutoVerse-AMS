@@ -27,7 +27,7 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Vehicle" asp-action="Index">Vehicles</a>
+                                <a class="nav-link text-dark" asp-controller="Vehicle" asp-action="Index">Manage Vehicles</a>
                             </li>
 
                             <li class="nav-item">
@@ -68,12 +68,18 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            <p>Powered by <strong>TopSpeed Motors</strong> &copy; @DateTime.Now.Year</p>
-        </div>
-    </footer>
+ <footer class="border-top text-muted py-3 mt-5">
+    <div class="container">
+        <p class="mb-2">
+            Powered by <strong>TopSpeed Motors</strong> © @DateTime.Now.Year
+        </p>
+        <p class="mb-0">
+            Contact
+           <a href="mailto:kamaleshkloganathan@gmail.com">Gmail</a> |
+           <a href="https://www.linkedin.com/in/kamaleshkloganathan/" target="_blank">LinkedIn</a> 
+        </p>
+    </div>
+</footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Vehicle>
+﻿@model IEnumerable<VehicleViewModel>
+
 <form method="get" asp-controller="Home" asp-action="Index" class="d-flex justify-content-center" role="search">
     <div class="col-md-2 me-2">
         <input type="text" name="searchBrand" value="@Context.Request.Query["searchBrand"]"
@@ -29,11 +30,11 @@
         {
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm h-100">
-                    <img src="@v.Imageurl" class="card-img-top" alt="@v.Model" style="height:200px;object-fit:cover;">
+                    <img src="@v.ImageUrl" class="card-img-top" alt="@v.Model" style="height:200px;object-fit:cover;">
                     <div class="card-body">
                         <h5 class="card-title">@v.Model</h5>
                         <p class="card-text">
-                            <strong>Brand:</strong> @v.Brand?.Name <br />
+                            <strong>Brand:</strong> @v.BrandName <br />
                             <strong>Price starts from:</strong> $@v.BaseModelPrice <br />
                             <strong>Rating:</strong> @v.Rating ⭐
                         </p>

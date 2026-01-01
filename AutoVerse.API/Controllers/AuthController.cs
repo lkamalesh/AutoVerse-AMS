@@ -44,7 +44,7 @@ namespace AutoVerse.API.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(result.Errors);
+                return StatusCode(500, result.Errors);
             }
             await _userManager.AddToRoleAsync(user, "Customer");
             Log.Information($"New user registered: {user.Email}");

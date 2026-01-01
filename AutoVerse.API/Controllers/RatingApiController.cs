@@ -1,7 +1,7 @@
-﻿using AutoVerse.Core.Entities;
+﻿using AutoVerse.Core.DTOs;
 using AutoVerse.Core.Interfaces.Services;
+using AutoVerse.API.Mappings;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -20,7 +20,7 @@ namespace AutoVerse.API.Controllers
         }
 
         [HttpPost("AddRating")]
-        public async Task<IActionResult> AddRating([FromBody]Rating rating)
+        public async Task<IActionResult> AddRating([FromBody]RatingDto ratingDto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -28,9 +28,10 @@ namespace AutoVerse.API.Controllers
             {
                 return Unauthorized();
             }
-            rating.UserId = userId;
+            ratingDto.UserId = userId;
+            var rating = RatingMappings.ToEntity(ratingDto);
             await _ratingService.AddRatingAsync(rating);
-            return Ok(new { Message = "Rating added successfully" });
+            return NoContent();
 
         }
 

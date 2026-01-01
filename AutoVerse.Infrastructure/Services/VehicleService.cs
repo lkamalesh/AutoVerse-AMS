@@ -2,12 +2,15 @@
 using AutoVerse.Core.Entities;
 using AutoVerse.Core.Interfaces.Repositories;
 using AutoVerse.Core.Interfaces.Services;
+using AutoVerse.Core.ViewModels;
 using AutoVerse.Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,35 +19,44 @@ namespace AutoVerse.Infrastructure.Services
     public class VehicleService : IVehicleService
     {
         private readonly IVehicleRepository _vehicleRepo;
-        private readonly AppDbContext _context;
-        public VehicleService(IVehicleRepository repo, AppDbContext context)
+        public VehicleService(IVehicleRepository repo)
         {
             _vehicleRepo = repo;
-            _context = context;
         }
 
-        public async Task<Vehicle?> SearchByIdAsync(int id)
+
+        public async Task<Vehicle?> GetByIdAsync(int id)
         {
             return await _vehicleRepo.GetByIdAsync(id);
         }
+
         public async Task<IEnumerable<Vehicle>> GetAllVehiclesAsync()
         {
             return await _vehicleRepo.GetAllAsync();
         }
 
-       
-        public async Task<IEnumerable<Vehicle>> SearchByBrandAsync(string brandName)
+        public async Task<IEnumerable<Vehicle>> SearchVehiclesAsync(
+            string? brandName,
+            string? modelName,
+            decimal? minPrice,
+            decimal? maxPrice)
         {
-            return await _vehicleRepo.GetByBrandAsync(brandName);
-        }
+            var vehicles = await _vehicleRepo.GetAllAsync();
 
-        public async Task<IEnumerable<Vehicle>> SearchByModelAsync(string modelName)
-        {
-            return await _vehicleRepo.GetByModelAsync(modelName);
-        }
-        public async Task<IEnumerable<Vehicle>> SearchByPriceAsync(decimal minPrice, decimal maxPrice)
-        {
-            return await _vehicleRepo.GetByPriceAsync(minPrice, maxPrice);
+            if (!string.IsNullOrWhiteSpace(brandName))
+            {
+                vehicles = vehicles.Where(v => v.Brand != null && v.Brand.Name.ToLower() == brandName.ToLower());
+            }
+            if (!string.IsNullOrWhiteSpace(modelName))
+            {
+                vehicles = vehicles.Where(v => v.Model.ToLower() == modelName.ToLower());
+            }
+            if (minPrice.HasValue && maxPrice.HasValue)
+            {
+                vehicles = vehicles.Where(v => v.BaseModelPrice >= minPrice && v.BaseModelPrice <= maxPrice);
+            }
+
+            return vehicles;
         }
 
         public async Task AddVehicleAsync(Vehicle vehicle, IFormFile? imagefile)
@@ -85,6 +97,5 @@ namespace AutoVerse.Infrastructure.Services
             }
             Log.Error("Image upload failed for vehicle {Id}", vehicle.Id);
         }
-        
     }
 }

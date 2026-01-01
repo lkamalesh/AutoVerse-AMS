@@ -1,5 +1,6 @@
 ﻿using AutoVerse.Core.DTOs;
 using AutoVerse.Core.Entities;
+using AutoVerse.Core.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace AutoVerse.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterDto register)
+        public async Task<IActionResult> Register(RegisterViewModel register)
         {
             if (!ModelState.IsValid)
             {
@@ -42,8 +43,8 @@ namespace AutoVerse.Web.Controllers
 
             if (result.Succeeded)
             {
-                Log.Information($"New user registered: {user.Email}");
                 await _userManager.AddToRoleAsync(user, "Customer");
+                Log.Information($"New user registered: {user.Email}");
                 await _signinManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
             }
@@ -59,7 +60,7 @@ namespace AutoVerse.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDto login)
+        public async Task<IActionResult> Login(LoginViewModel login)
         {
             var user = await _userManager.FindByEmailAsync(login.Email);
 

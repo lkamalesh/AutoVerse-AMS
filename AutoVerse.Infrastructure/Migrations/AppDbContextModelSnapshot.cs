@@ -150,6 +150,11 @@ namespace AutoVerse.Infrastructure.Migrations
                     b.Property<decimal>("BaseModelPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("BodyType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
 
@@ -189,34 +194,11 @@ namespace AutoVerse.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("VehicleTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
 
-                    b.HasIndex("VehicleTypeId");
-
                     b.ToTable("Vehicles");
-                });
-
-            modelBuilder.Entity("AutoVerse.Core.Entities.VehicleType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("TypeName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VehicleTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -379,15 +361,7 @@ namespace AutoVerse.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("AutoVerse.Core.Entities.VehicleType", "VehicleType")
-                        .WithMany("vehicles")
-                        .HasForeignKey("VehicleTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Brand");
-
-                    b.Navigation("VehicleType");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -442,11 +416,6 @@ namespace AutoVerse.Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("AutoVerse.Core.Entities.Brand", b =>
-                {
-                    b.Navigation("vehicles");
-                });
-
-            modelBuilder.Entity("AutoVerse.Core.Entities.VehicleType", b =>
                 {
                     b.Navigation("vehicles");
                 });

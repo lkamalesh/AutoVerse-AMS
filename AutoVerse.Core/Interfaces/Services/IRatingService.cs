@@ -1,4 +1,6 @@
-﻿using AutoVerse.Core.Entities;
+﻿using AutoVerse.Core.DTOs;
+using AutoVerse.Core.Entities;
+using AutoVerse.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,5 @@ namespace AutoVerse.Core.Interfaces.Services
     {
         Task AddRatingAsync(Rating rating);
 
-        Task<double> GetAverageRatingAsync(int vehicleId);
     }
 }

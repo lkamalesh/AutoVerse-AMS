@@ -1,4 +1,4 @@
-﻿@model Vehicle
+﻿@model VehicleViewModel
 
 <h2 class="mb-3 text-danger" style="font-family:verdana">Delete Vehicle</h2>
 
@@ -10,7 +10,7 @@
         <dd class="col-sm-9">@Model.Model</dd>
 
         <dt class="col-sm-3">Brand</dt>
-        <dd class="col-sm-9">@Model.Brand?.Name</dd>
+        <dd class="col-sm-9">@Model.BrandName</dd>
 
         <dt class="col-sm-3">Price</dt>
         <dd class="col-sm-9">₹@Model.BaseModelPrice</dd>

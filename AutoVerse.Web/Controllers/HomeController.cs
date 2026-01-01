@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using AutoVerse.Core.Entities;
 using AutoVerse.Core.Interfaces.Services;
+using AutoVerse.Web.Mappings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,26 +19,9 @@ namespace AutoVerse.Web.Controllers
 
         public async Task<IActionResult> Index(string? searchBrand, string? searchModel, decimal? minPrice, decimal? maxPrice)
         {
-            var vehicles = Enumerable.Empty<Vehicle>();
+            var vehicles = await _vehicleService.SearchVehiclesAsync(searchBrand, searchModel, minPrice, maxPrice);
 
-            if (searchBrand != null)
-            {
-                vehicles = await _vehicleService.SearchByBrandAsync(searchBrand);
-            }
-            else if (searchModel != null)
-            {
-                vehicles = await _vehicleService.SearchByModelAsync(searchModel);
-            }
-            else if(minPrice != null && maxPrice != null)
-            {
-                vehicles = await _vehicleService.SearchByPriceAsync(minPrice.Value, maxPrice.Value);
-            }
-            else
-            {
-                vehicles = await _vehicleService.GetAllVehiclesAsync();
-            }
-
-                return View(vehicles);
+            return View(VehicleMappings.ToViewmodels(vehicles));
 
         }
 

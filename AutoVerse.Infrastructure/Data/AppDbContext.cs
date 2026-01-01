@@ -18,7 +18,6 @@ namespace AutoVerse.Infrastructure.Data
         }
 
         public DbSet<Brand> Brands { get; set; }
-        public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Rating> Ratings { get; set; }  
 
@@ -39,14 +38,8 @@ namespace AutoVerse.Infrastructure.Data
                 .HasForeignKey(v => v.BrandId)
                 .OnDelete(DeleteBehavior.Restrict);// Prevent cascade delete to avoid deleting vehicles when a brand is deleted
 
-            builder.Entity<Vehicle>()
-                .HasOne(v => v.VehicleType)
-                .WithMany(c => c.vehicles)
-                .HasForeignKey(v => v.VehicleTypeId)
-                .OnDelete(DeleteBehavior.Restrict);// Prevent cascade delete to avoid deleting vehicles when a vehicle type is deleted
 
         }
-
 
     }
 }

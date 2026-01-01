@@ -18,5 +18,13 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 0px;
 }
+footer.footer {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+footer.footer p {
+        margin-bottom: 0.2rem;
+    }

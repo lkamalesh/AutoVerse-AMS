@@ -1,8 +1,12 @@
-﻿using AutoVerse.Core.Entities;
+﻿using AutoVerse.Core.DTOs;
+using AutoVerse.Core.Entities;
 using AutoVerse.Core.Interfaces.Repositories;
 using AutoVerse.Core.Interfaces.Services;
+using AutoVerse.Core.ViewModels;
+using AutoVerse.Web.Mappings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace AutoVerse.Web.Controllers
 {
@@ -18,15 +22,19 @@ namespace AutoVerse.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var brands = await _vehicleService.GetAllVehiclesAsync();
-            return View(brands);
+            var vehicles = await _vehicleService.GetAllVehiclesAsync();
+            return View(VehicleMappings.ToViewmodels(vehicles));
         }
 
         [Authorize]
         public async Task<IActionResult> Details(int id)
         {
-            var vehicle = await _vehicleService.SearchByIdAsync(id);
-            return View(vehicle);
+            var vehicle = await _vehicleService.GetByIdAsync(id);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            return View(VehicleMappings.ToViewModel(vehicle));
         }
 
         [Authorize(Roles = "Admin")]
@@ -39,22 +47,24 @@ namespace AutoVerse.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create(Vehicle vehicle, IFormFile? imageFile)
+        public async Task<IActionResult> Create(VehicleViewModel vehicleVm, IFormFile? imageFile)
         {
             if (ModelState.IsValid)
             {
+                var vehicle = VehicleMappings.ToEntity(vehicleVm);
                 await _vehicleService.AddVehicleAsync(vehicle, imageFile);
+                Log.Information($"New vehicle created. Id={vehicleVm.Id}");
                 return RedirectToAction(nameof(Index));
             }
 
             ViewBag.Brands = await _brandRepo.GetAllAsync();
-            return View(vehicle);
+            return View(vehicleVm);
         }
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
-           var vehicle = await _vehicleService.SearchByIdAsync(id);
+           var vehicle = await _vehicleService.GetByIdAsync(id);
 
             if (vehicle == null)
             {
@@ -62,35 +72,36 @@ namespace AutoVerse.Web.Controllers
             }
 
             ViewBag.Brands = await _brandRepo.GetAllAsync();
-            return View(vehicle);
+            return View(VehicleMappings.ToViewModel(vehicle));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(Vehicle vehicle, IFormFile? imageFile)
+        public async Task<IActionResult> Edit(VehicleViewModel vehicleVm, IFormFile? imageFile)
         {
             if (ModelState.IsValid)
             {
+                var vehicle = VehicleMappings.ToEntity(vehicleVm);
                 await _vehicleService.UpdateVehicleAsync(vehicle, imageFile);
                 return RedirectToAction(nameof(Index));
             }
 
             ViewBag.Brands = await _brandRepo.GetAllAsync();
-            return View(vehicle);
+            return View(vehicleVm);
         }
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
-            var vehicle = await _vehicleService.SearchByIdAsync(id);
+            var vehicle = await _vehicleService.GetByIdAsync(id);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            return View(vehicle);
+            return View(VehicleMappings.ToViewModel(vehicle));
         }
 
         [HttpPost("Delete")]
@@ -99,6 +110,7 @@ namespace AutoVerse.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _vehicleService.DeleteVehicleAsync(id);
+            Log.Information($"Vehicle deleted. Id={id}");
             return RedirectToAction(nameof(Index));
         }
     }

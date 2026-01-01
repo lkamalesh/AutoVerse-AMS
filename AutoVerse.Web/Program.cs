@@ -41,6 +41,7 @@ builder.Services.AddControllersWithViews(options =>
 
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IRatingService, RatingService>();

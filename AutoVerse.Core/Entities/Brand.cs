@@ -13,7 +13,7 @@ namespace AutoVerse.Core.Entities
 
         [Required]
         [MaxLength(100)]    
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = null!;
 
         public ICollection<Vehicle> vehicles { get; set; } = new List<Vehicle>();  // (one brand → many vehicles)
     }
