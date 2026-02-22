@@ -138,20 +138,7 @@ It’s designed to showcase a structured professional project with:
 
 -------------
 
-**Customer sample Test Account (browse and rate)**
-
-`Register`
-
-POST /api/Auth/register
-
-{
-
-  "fullName": "John victor",
-  "email": "john@gmail.com",
-  "password": "Password123!",
-  "confirmpassword": "Password123!"
-  
-}
+**Admin Account (manage brand and vehicles)**
 
 `Login`
 
@@ -159,9 +146,9 @@ POST /api/Auth/login
 
 {
 
-  "email": "john@gmail.com",
-  "password": "Password123!"
-  
+   "Email": "administrator@autoverse.com",
+   "Password": "iamAdmin@123"
+
 }
 
 Returns:
